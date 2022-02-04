@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:stretchColumns="0">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:paddingBottom="8dp"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/linearLayout1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="10dp"
+                android:textColor="#ffffff"
+                android:layout_column="0">
+
+                <TextView
+                    android:id="@+id/tvOrderDisplay_ProductName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Product name.." />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvOrderDisplay_Quantity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1" />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" x " />
+
+                    <TextView
+                        android:id="@+id/tvOrderDisplay_Price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="19,99" />
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvOrderDisplay_Total"
+                android:layout_width="130dp"
+                android:layout_height="match_parent"
+                android:layout_toEndOf="@+id/linearLayout1"
+                android:gravity="right|center_vertical"
+                android:text="999,999.00"
+                android:textColor="#000000"
+                android:paddingEnd="10dp"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_column="1" />
+
+        </TableRow>
+
+
+    </TableLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

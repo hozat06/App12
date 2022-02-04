@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Name="pg"
+             x:Class="App1.MainPage">
+
+    <StackLayout Padding="15">
+        <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+              RowDefinitions="*"
+              ColumnDefinitions="200, *">
+
+            <!--box-->
+            <ListView x:Name="listOrder"
+                      Grid.Row="0" Grid.Column="0"
+                      ItemsSource="{Binding Order.Lines}"
+                      HasUnevenRows="True"
+                      SeparatorColor="Orange"
+                      SelectionMode="None">
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid RowDefinitions="auto, auto"
+                                  ColumnDefinitions="*, auto"
+                                  Padding="0,10">
+
+                                <Label Text="{Binding Product.Name}"
+                                       Grid.Row="0" Grid.Column="0"
+                                       FontAttributes="Bold" TextColor="Black" />
+
+                                <Label Grid.Row="1" Grid.Column="0" TextColor="Black">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <FormattedString.Spans>
+                                                <Span Text="Quantity: " />
+                                                <Span Text="{Binding Quantity}" FontAttributes="Bold" />
+                                                <Span Text=" " />
+                                                <Span Text="Total: " />
+                                                <Span Text="{Binding Total, StringFormat='{0:N2}'}" FontAttributes="Bold" />
+                                            </FormattedString.Spans>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+
+                                <Button x:Name="btnRemove"
+                                        Text="x" TextColor="Red" BackgroundColor="Transparent" WidthRequest="40" HeightRequest="40"
+                                        VerticalOptions="Center" HorizontalOptions="Center"
+                                        Grid.Row="0" Grid.Column="1" Grid.RowSpan="2"
+                                        CommandParameter="{Binding .}"
+                                        Command="{Binding BindingContext.OrderProductRemoveCommand, Source={x:Reference Name=pg}}" />
+
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                
+            </ListView>
+
+            <Grid Grid.Row="0" Grid.Column="1"
+                  RowDefinitions="50, *, auto"
+                  Padding="10,0">
+                
+                <!--Categories-->
+                <CollectionView x:Name="collectionViewCategories"
+                                Grid.Row="0"
+                                ItemsSource="{Binding Categories}"
+                                ItemsLayout="HorizontalList">
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Button x:Name="btnCategory" 
+                                    Text="{Binding Name}"
+                                    CommandParameter="{Binding .}"
+                                    Command="{Binding BindingContext.CategorySelectedCommand, Source={x:Reference Name=pg}}" />
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                    
+                </CollectionView>
+
+                <!--Products-->
+                <CollectionView x:Name="collectionViewProducts"
+                                Grid.Row="1"
+                                ItemsSource="{Binding Products}">
+
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical"
+                                         Span="{Binding ProductGridColumns}" />
+                    </CollectionView.ItemsLayout>
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Button x:Name="btnProduct" 
+                                    Text="{Binding Name}"
+                                    HeightRequest="100"
+                                    CommandParameter="{Binding .}"
+                                    Command="{Binding BindingContext.ProductSelectedCommand, Source={x:Reference Name=pg}}" />
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+
+                </CollectionView>
+                
+                <!--Footer-->
+                <StackLayout Orientation="Horizontal"
+                             Grid.Row="2">
+
+                    <Button x:Name="btnOk"
+                            Text="OK"
+                            VerticalOptions="Center" HorizontalOptions="Start"
+                            Command="{Binding OrderOKCommand}" />
+
+                    <Label Text="{Binding Total, StringFormat='{0:N2}'}"
+                           FontSize="16" TextColor="DarkRed"
+                           VerticalOptions="Center" HorizontalOptions="EndAndExpand" />
+
+                </StackLayout>
+
+            </Grid>
+            
+            
+        </Grid>
+    </StackLayout>
+
+</ContentPage>
